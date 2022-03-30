@@ -26,8 +26,14 @@
         <div class="container p-5">
            {% block content %}
             <h1 class="text-center">WELCOME <a href="{{ url_for('favorites') }}" class="link-dark">CLICK HERE</a> TO GO TO MY FAVORITE MOVIES</h1>
-           {% endblock content %}
+          
         </div>
+
+        <div class="container p-5">
+           
+             <h1 class="text-center">WELCOME <a href="{{ url_for('phonebook') }}" class="link-dark">CLICK HERE</a> TO ADD NAME TO THE BOOK</h1>
+            {% endblock content %}
+         </div>
 
         
 
