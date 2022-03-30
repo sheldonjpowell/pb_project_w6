@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1>Phone Book</h1>
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.name.label }}
+            {{ form.name(class='form-control', placeholder='name') }}
+
+            {{ form.phonenumber.label }}
+            {{ form.phonenumber(class='form-control', placeholder='phonenumber') }}
+
+            {{ form.address.label }}
+            {{ form.address(class='form-control', placeholder='address') }}
+
+          
+        </div>
+    </form>
+{% endblock content %} 

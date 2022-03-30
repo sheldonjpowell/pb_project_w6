@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="Description" content="Enter your description here"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <title>Sheldon's Favorite Things | {{ title }}</title>
+    </head>
+    <body>
+        <div class="row bg-dark pt-5">
+            <h1 class="text-center text-white">Sheldon's Favorite Movies </h1>
+        </div>
+
+        <nav class="nav bg-dark d-flex justify-content-around pb-3">
+            <a href="{{ url_for('index') }}" class="link-light">Home</a>
+            <a href="{{ url_for('phonebook') }}" class="link-light">Phone Book</a>
+            <a href="" class="link-light">Favorites</a>
+         
+        </nav>
+        <div class="container p-5">
+        {% for m in movies %}
+            <div class="card p-3">
+                <div class="card-body p-5">
+                    <h5 class="card-title">{{ m.title }}</h5>
+                    <p class="card-text">{{ m.body }}</p>
+                    <div class="pb-3">
+                        <cite>&mdash; {{ m.year }}</cite>
+                    </div>
+                    <a href="{{ m.url }}" class="btn btn-dark">More Info</a>
+                </div>    
+            </div>
+            
+        {% endfor %}
+        </div>
+        <div class="container  p-5">
+        {% for e in extra %}
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne-{{ e.id }}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    HONORAY MENTIONS {{ e.id }}
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseOne-{{ e.id }}" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <strong>{{ e.title }}</strong>
+                    <div class="p-2"></div>
+                  <a href="{{ e.url }}" class="btn btn-dark"> More Info</a>
+                </div>
+              </div>
+            </div>
+            
+
+
+        {% endfor %}
+
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    </body>
+</html>
