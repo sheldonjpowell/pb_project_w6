@@ -7,7 +7,7 @@ def index():
     title = 'Home'
     return render_template('index.html')
 
-@app.route('/pb')
+@app.route('/pb', methods=["GET","POST"])
 def phonebook():
     title = 'PhoneBook'
     form = PhoneBook()
