@@ -1,6 +1,7 @@
 from app import app, forms
 from flask import redirect, render_template, url_for
 from app.forms import PhoneBook
+from app.models import User, Post
 
 @app.route('/base')
 def index():
@@ -16,6 +17,8 @@ def phonebook():
         name = form.name.data
         phonenumber = form.phonenumber.data
         address = form.address.data
+        new_user = User (name=name, phonenumber=phonenumber, address=address)
+        return redirect(url_for('index'))
     return render_template('pb.html', title=title, form=form)
 
 @app.route('/favorites')
