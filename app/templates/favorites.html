@@ -8,17 +8,17 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
-        <title>Sheldon's Favorite Things | {{ title }}</title>
+        <title>Sheldon's Pages | {{ title }}</title>
     </head>
     <body>
-        <div class="row bg-dark pt-5">
-            <h1 class="text-center text-white">Sheldon's Favorite Movies </h1>
+        <div class="row bg-dark p-5">
+            <h1 class="text-center text-white">Sheldon's Pages</h1>
         </div>
 
-        <nav class="nav bg-dark d-flex justify-content-around pb-3">
-            <a href="{{ url_for('index') }}" class="link-light">Home</a>
-            <a href="{{ url_for('phonebook') }}" class="link-light">Phone Book</a>
-            <a href="" class="link-light">Favorites</a>
+        <nav class="navbar navbar-light justify-content-center p-3" style="background-color: #362915;">
+            <a href="{{ url_for('index') }}" class="link-light pe-5">Home</a>
+            <a href="{{ url_for('phonebook') }}" class="link-light px-5">Phone Book</a>
+            <a href="{{ url_for('favorites') }}" class="link-light ps-5">Favorites</a>
          
         </nav>
         <div class="container p-5">
