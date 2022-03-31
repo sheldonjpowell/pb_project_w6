@@ -1,26 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="Description" content="Enter your description here"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <title>Sheldon's Pages | {{ title }}</title>
-    </head>
-    <body>
-        <div class="row bg-dark p-5">
-            <h1 class="text-center text-white">Sheldon's Pages</h1>
-        </div>
+{% extends 'base.html' %}
 
-        <nav class="navbar navbar-light justify-content-center p-3" style="background-color: #362915;">
-            <a href="{{ url_for('index') }}" class="link-light pe-5">Home</a>
-            <a href="{{ url_for('phonebook') }}" class="link-light px-5">Phone Book</a>
-            <a href="{{ url_for('favorites') }}" class="link-light ps-5">Favorites</a>
-         
-        </nav>
         <div class="container p-5">
         {% for m in movies %}
             <div class="card p-3">

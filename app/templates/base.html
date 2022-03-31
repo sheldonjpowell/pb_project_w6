@@ -19,13 +19,17 @@
             <a href="{{ url_for('index') }}" class="link-light pe-5">Home</a>
             <a href="{{ url_for('phonebook') }}" class="link-light px-5">Phone Book</a>
             <a href="{{ url_for('favorites') }}" class="link-light ps-5">Favorites</a>
+            <a href="{{ url_for('login') }}" class="link-light ps-5">Log In</a>
          
         </nav>
 
         <div class="container p-5">
-           {% block content %}
+            
+            {% include 'alert_message.html' %}
 
-           {% endblock content %}
+            {% block content %}
+
+            {% endblock content %}
         </div>
 
         

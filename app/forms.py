@@ -13,7 +13,12 @@ from wtforms.validators import DataRequired, Email, EqualTo
 
 class PhoneBook(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
     phonenumber = StringField('Phonenumber', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
     submit = SubmitField('Click To Add')
     
+class Loginform(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Sign Up')

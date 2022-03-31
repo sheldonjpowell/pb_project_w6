@@ -1,10 +1,17 @@
-from app import db
+from app import db, login
+from flask_login import UserMixin
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
-class User(db.Model):
+
+@login.user_loader
+def get_user(user_id):
+    return User.query.get(user_id)
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
+    username = db.Column(db.String(50), unique=True, nullable=False)
     phonenumber = db.Column(db.Numeric(10), nullable=False)
     address = db.Column(db.String(256), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

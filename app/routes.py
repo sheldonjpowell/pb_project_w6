@@ -1,9 +1,10 @@
 from app import app, forms
-from flask import redirect, render_template, url_for
-from app.forms import PhoneBook
+from flask import redirect, render_template, url_for, flash
+from app.forms import PhoneBook, Loginform
 from app.models import User, Post
 
-@app.route('/base')
+
+@app.route('/')
 def index():
     title = 'Home'
     return render_template('index.html')
@@ -15,11 +16,23 @@ def phonebook():
     if form.validate_on_submit():
         # Get data from the validated form
         name = form.name.data
+        username = form.username.data
         phonenumber = form.phonenumber.data
         address = form.address.data
-        new_user = User (name=name, phonenumber=phonenumber, address=address)
+
+        users_with_that_info = User.query.filter((User.address==address))(User.username==username).all()
+        if users_with_that_info:
+            flash(f"There is already a user with this address", "danger")
+            return render_template('pb.html', title=title, form=form)
+
+        new_user = User (name=name, username=username, phonenumber=phonenumber, address=address)
+
+        flash(f"{new_user.name} has added what was needed", "success")
         return redirect(url_for('index'))
     return render_template('pb.html', title=title, form=form)
+
+
+
 
 @app.route('/favorites')
 def favorites():
@@ -93,4 +106,13 @@ def favorites():
             'url' : 'https://www.imdb.com/title/tt6644200/?ref_=nv_sr_srsg_0'
         }
     ]
-    return render_template('favorites.html', title=title, movies=movies, extra=extra)
+
+    return render_template('favorites.html', title=title, movies=movies, extra=extra) 
+
+
+
+@app.route('/login')
+def login():
+    title = 'Log In'
+    form = Loginform
+    return render_template('login.html', title=title, form=form)    

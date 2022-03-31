@@ -6,8 +6,12 @@
     <form method="post">
         {{ form.csrf_token }}
         <div class="form-group">
+
             {{ form.name.label }}
             {{ form.name(class='form-control', placeholder='name') }}
+
+            {{ form.username.label }}
+            {{ form.username(class='form-control', placeholder='Username') }}
 
             {{ form.phonenumber.label }}
             {{ form.phonenumber(class='form-control', placeholder='phonenumber') }}
