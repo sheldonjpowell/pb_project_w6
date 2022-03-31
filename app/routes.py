@@ -1,5 +1,6 @@
 from app import app, forms
 from flask import redirect, render_template, url_for, flash
+from flask_login import login_user
 from app.forms import PhoneBook, Loginform, SignUpForm
 from app.models import User, Post
 
@@ -31,26 +32,9 @@ def phonebook():
         return redirect(url_for('index'))
     return render_template('pb.html', title=title, form=form)
 
-@app.route('/signup', methods=["GET", "POST"])
-def signup():
-    title = 'Sign Up'
-    form = SignUpForm()
-    # check if a post request and that the form is valid
-    if form.validate_on_submit():
-        # Get data from the validated form
-        # email = form.email.data
-        username = form.username.data
-        password = form.password.data
-        # Create a new user instance with form data
-        new_user = User(username=username, password=password)
-        return redirect(url_for('index'))
-
-    return render_template('signup.html', title=title, form=form)
 
 
-
-
-@app.route('/favorites')
+@app.route('/favorites', methods=["GET", "POST"])
 def favorites():
     title = 'Favorites'
     movies = [
@@ -124,6 +108,32 @@ def favorites():
     ]
 
     return render_template('favorites.html', title=title, movies=movies, extra=extra) 
+    
+
+
+
+
+
+@app.route('/signup', methods=["GET", "POST"])
+def signup():
+    title = 'Sign Up'
+    form = SignUpForm()
+    # check if a post request and that the form is valid
+    if form.validate_on_submit():
+        # Get data from the validated form
+        # email = form.email.data
+        username = form.username.data
+        password = form.password.data
+        # Create a new user instance with form data
+        new_user = User(username=username, password=password)
+        return redirect(url_for('index'))
+
+    return render_template('signup.html', title=title, form=form)
+
+
+
+
+
 
 
 

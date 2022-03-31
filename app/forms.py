@@ -21,4 +21,4 @@ class PhoneBook(FlaskForm):
 class Loginform(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Sign Up')
+    submit = SubmitField('Log In')

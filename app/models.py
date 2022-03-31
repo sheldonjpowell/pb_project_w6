@@ -26,6 +26,7 @@ class User(db.Model, UserMixin):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.name = generate_password_hash(kwargs['name'])
+        self.password = generate_password_hash(kwargs['password'])
         db.session.add(self)
         db.session.commit()
 
