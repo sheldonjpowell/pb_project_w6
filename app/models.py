@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     username = db.Column(db.String(50), unique=True, nullable=False)
+    password = db.Column(db.String(256), nullable=False)
     phonenumber = db.Column(db.Numeric(10), nullable=False)
     address = db.Column(db.String(256), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -24,18 +25,18 @@ class User(db.Model, UserMixin):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        # self.name = generate_password_hash(kwargs['name'])
+        self.name = generate_password_hash(kwargs['name'])
         db.session.add(self)
         db.session.commit()
 
     def __repr__(self):
         return f"<User|{self.name}>"
 
-    # def __str__(self):
-    #     return self.username
+    def __str__(self):
+        return self.username
 
-    # def check_password(self, password):
-    #     return check_password_hash(self.password, password)
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
 
 class Post(db.Model):

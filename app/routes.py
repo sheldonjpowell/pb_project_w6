@@ -1,6 +1,6 @@
 from app import app, forms
 from flask import redirect, render_template, url_for, flash
-from app.forms import PhoneBook, Loginform
+from app.forms import PhoneBook, Loginform, SignUpForm
 from app.models import User, Post
 
 
@@ -16,20 +16,36 @@ def phonebook():
     if form.validate_on_submit():
         # Get data from the validated form
         name = form.name.data
-        username = form.username.data
+        # username = form.username.data
         phonenumber = form.phonenumber.data
         address = form.address.data
 
-        users_with_that_info = User.query.filter((User.address==address))(User.username==username).all()
+        users_with_that_info = User.query.filter((User.address==address)).all()
         if users_with_that_info:
             flash(f"There is already a user with this address", "danger")
             return render_template('pb.html', title=title, form=form)
 
-        new_user = User (name=name, username=username, phonenumber=phonenumber, address=address)
+        new_user = User(name=name, phonenumber=phonenumber, address=address)
 
         flash(f"{new_user.name} has added what was needed", "success")
         return redirect(url_for('index'))
     return render_template('pb.html', title=title, form=form)
+
+@app.route('/signup', methods=["GET", "POST"])
+def signup():
+    title = 'Sign Up'
+    form = SignUpForm()
+    # check if a post request and that the form is valid
+    if form.validate_on_submit():
+        # Get data from the validated form
+        # email = form.email.data
+        username = form.username.data
+        password = form.password.data
+        # Create a new user instance with form data
+        new_user = User(username=username, password=password)
+        return redirect(url_for('index'))
+
+    return render_template('signup.html', title=title, form=form)
 
 
 
@@ -111,8 +127,19 @@ def favorites():
 
 
 
-@app.route('/login')
+@app.route('/login', methods=["GET","POST"])
 def login():
     title = 'Log In'
-    form = Loginform
+    form = Loginform()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        user = User.query.filter_by(username=username).first()
+
+        if user and user.check_password(password):
+            flash(f'{user} has successfully logged in', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Username and/or password is incorrect')
+        
     return render_template('login.html', title=title, form=form)    
